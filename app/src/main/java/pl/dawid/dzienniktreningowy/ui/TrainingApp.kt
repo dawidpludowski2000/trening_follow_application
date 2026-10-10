@@ -25,8 +25,8 @@ import pl.dawid.dzienniktreningowy.domain.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-fun dateLabel(time: Long): String = SimpleDateFormat("dd.MM.yyyy", Locale("pl","PL")).format(Date(time))
-fun decimal(value: Double): String = String.format(Locale("pl","PL"),"%.1f",value)
+fun dateLabel(time: Long): String = SimpleDateFormat("dd.MM.yyyy", Locale.forLanguageTag("pl-PL")).format(Date(time))
+fun decimal(value: Double): String = String.format(Locale.forLanguageTag("pl-PL"),"%.1f",value)
 fun WorkoutWithExercises.volume() = Training.volume(exercises.map { ExerciseValue(it.name,it.sets,it.reps,it.weight) })
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -41,7 +41,7 @@ fun WorkoutWithExercises.volume() = Training.volume(exercises.map { ExerciseValu
         navigationIcon={ if(draft!=null) TextButton(onClick={confirmExit=true},enabled=!vm.saving) { Text("Wróć") } }) },
         snackbarHost={ if(draft==null) SnackbarHost(snackbar) }, bottomBar={ if(draft==null) NavigationBar {
             listOf("Plany","Historia","Postępy","Ustawienia").forEachIndexed { i,tab ->
-                NavigationBarItem(selected=vm.tab==tab,onClick={vm.selectTab(tab)},icon={ Text(listOf("▤","◷","↗","⚙")[i],modifier=Modifier.clearAndSetSemantics {}) },label={Text(tab)},modifier=Modifier.testTag("tab_$i"))
+                NavigationBarItem(selected=vm.tab==tab,onClick={vm.selectTab(tab)},icon={ Text(listOf("▤","◷","↗","⚙")[i],modifier=Modifier.clearAndSetSemantics {}) },label={Text(tab,maxLines=1,overflow=androidx.compose.ui.text.style.TextOverflow.Ellipsis)},modifier=Modifier.testTag("tab_$i"))
             }
         } }) { padding ->
         Box(Modifier.fillMaxSize().padding(padding),contentAlignment=Alignment.TopCenter) {
@@ -174,15 +174,6 @@ fun WorkoutWithExercises.volume() = Training.volume(exercises.map { ExerciseValu
             items(last) {w -> Text("${dateLabel(w.workout.performedAt)} · ${w.workout.name}: ${decimal(w.volume())} kg")}
         }
         item { Text("Objętość = suma (serie × powtórzenia × ciężar). Wykres czytaj od najstarszego treningu po lewej. Porównuj podobne treningi; masa ciała nie jest wliczana.",style=MaterialTheme.typography.bodySmall) }
-    }
-}
-
-// Integracje urządzenia zostaną dołączone w osobnym, testowanym etapie.
-@Composable fun LocationSection(d:EditorDraft,saving:Boolean,change:(EditorDraft)->Unit) { Text("Miejsce treningu jest opcjonalne.") }
-@Composable fun SettingsScreen(tell:(String)->Unit) {
-    Column(Modifier.padding(20.dp),verticalArrangement=Arrangement.spacedBy(12.dp)) {
-        Heading("Ustawienia", "Dziennik działa lokalnie, bez konta.")
-        Text("Dane są przechowywane w prywatnej bazie aplikacji. Odinstalowanie aplikacji usuwa historię.")
     }
 }
 
