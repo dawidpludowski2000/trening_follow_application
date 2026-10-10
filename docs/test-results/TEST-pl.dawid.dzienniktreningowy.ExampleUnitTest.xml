@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="pl.dawid.dzienniktreningowy.ExampleUnitTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-10-10T11:59:34.708Z" hostname="DESKTOP-I8PLC2Q" time="0.008">
-  <properties/>
-  <testcase name="addition_isCorrect" classname="pl.dawid.dzienniktreningowy.ExampleUnitTest" time="0.003"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

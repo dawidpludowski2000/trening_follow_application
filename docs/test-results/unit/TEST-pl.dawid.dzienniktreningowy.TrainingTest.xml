@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="pl.dawid.dzienniktreningowy.TrainingTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-10-10T11:32:25.849Z" hostname="DESKTOP-I8PLC2Q" time="0.16">
+<testsuite name="pl.dawid.dzienniktreningowy.TrainingTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-10-10T11:59:34.736Z" hostname="DESKTOP-I8PLC2Q" time="0.041">
   <properties/>
-  <testcase name="rejectsInvalidRanges" classname="pl.dawid.dzienniktreningowy.TrainingTest" time="0.153"/>
-  <testcase name="validatesDurationAndNote" classname="pl.dawid.dzienniktreningowy.TrainingTest" time="0.002"/>
+  <testcase name="rejectsInvalidRanges" classname="pl.dawid.dzienniktreningowy.TrainingTest" time="0.037"/>
+  <testcase name="validatesDurationAndNote" classname="pl.dawid.dzienniktreningowy.TrainingTest" time="0.0"/>
   <testcase name="calculatesVolumeAndRepetitions" classname="pl.dawid.dzienniktreningowy.TrainingTest" time="0.002"/>
   <testcase name="rejectsEmptyNameAndEmptyPlan" classname="pl.dawid.dzienniktreningowy.TrainingTest" time="0.001"/>
-  <testcase name="acceptsBodyweightAndDecimalComma" classname="pl.dawid.dzienniktreningowy.TrainingTest" time="0.0"/>
+  <testcase name="acceptsBodyweightAndDecimalComma" classname="pl.dawid.dzienniktreningowy.TrainingTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
