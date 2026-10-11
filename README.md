@@ -61,5 +61,8 @@ Kotlin, Compose Material 3, MVVM, Room/SQLite, Coroutines i Flow, WorkManager, L
 - [Scenariusz obrony](docs/OBRONA.md)
 - Zrzuty najważniejszych widoków: `docs/screenshots/`.
 
-## GitHub
-Lokalne repozytorium ma historię etapów. Publikacja na GitHubie wymaga repozytorium na koncie autora i autoryzacji tego konta. Nie wpisano fikcyjnego adresu. Po opublikowaniu dodaj rzeczywisty link w dokumentacji przed oddaniem.
+## Repozytorium
+Kod źródłowy i historia zmian: [github.com/dawidpludowski2000/trening_follow_application](https://github.com/dawidpludowski2000/trening_follow_application).
+
+## Dokumentacja
+Architektura, użyte biblioteki, wymagania i wyniki testów są opisane w dokumentacji w folderze docs/.

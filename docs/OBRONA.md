@@ -36,6 +36,6 @@
 
 ## Przed oddaniem
 - Dodaj wymagane przez uczelnię dane autora i grupy.
-- Opublikuj repozytorium i wklej rzeczywisty link.
+- Repozytorium projektu: https://github.com/dawidpludowski2000/trening_follow_application.
 - Sprawdź APK na urządzeniu, na którym będziesz prezentować.
 - Przygotuj przykładowe treningi. Dane demonstracyjne w emulatorze nie są zaszyte w APK.
