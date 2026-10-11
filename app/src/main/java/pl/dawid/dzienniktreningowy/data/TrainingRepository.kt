@@ -1,6 +1,7 @@
 package pl.dawid.dzienniktreningowy.data
 
 import androidx.room.withTransaction
+import java.util.Calendar
 import pl.dawid.dzienniktreningowy.domain.*
 
 class TrainingRepository(private val db: TrainingDatabase) {
@@ -35,4 +36,33 @@ class TrainingRepository(private val db: TrainingDatabase) {
     }
     suspend fun deletePlan(id: Long) = dao.deletePlan(id)
     suspend fun deleteWorkout(id: Long) = dao.deleteWorkout(id)
+
+    /** Inserts the optional presentation data only when the journal is completely empty. */
+    suspend fun seedDemoIfEmpty(): Boolean = db.withTransaction {
+        if (dao.planCount() != 0 || dao.workoutCount() != 0) return@withTransaction false
+
+        val strength = listOf(ExerciseInput("Przysiad", "3", "10", "20"), ExerciseInput("Wyciskanie hantli", "3", "10", "8"))
+        insertPlan("Trening całego ciała", strength)
+        insertPlan("Krótki trening w domu", listOf(ExerciseInput("Pompki", "3", "12", "0"), ExerciseInput("Wykroki", "3", "10", "0")))
+        listOf(18, 15, 12, 8, 4, 0).forEachIndexed { index, daysAgo ->
+            val date = Calendar.getInstance().apply { add(Calendar.DAY_OF_YEAR, -daysAgo) }.timeInMillis
+            val exercises = strength.mapIndexed { exerciseIndex, exercise ->
+                exercise.copy(weight = if (exerciseIndex == 0) (20 + index * 2.5).toString() else "8")
+            }
+            insertWorkout(Workout(name = "Trening całego ciała", performedAt = date, durationMinutes = 35 + index * 2,
+                note = if (index == 5) "Dobry trening. Następnym razem spróbuję większego ciężaru." else "",
+                latitude = if (index == 5) 52.2297 else null, longitude = if (index == 5) 21.0122 else null), exercises)
+        }
+        true
+    }
+
+    private suspend fun insertPlan(name: String, inputs: List<ExerciseInput>) {
+        val id = dao.insertPlan(Plan(name = name))
+        dao.insertPlanExercises(Training.values(inputs).mapIndexed { i, e -> PlanExercise(planId = id, position = i, name = e.name, sets = e.sets, reps = e.reps, weight = e.weight) })
+    }
+
+    private suspend fun insertWorkout(workout: Workout, inputs: List<ExerciseInput>) {
+        val id = dao.insertWorkout(workout)
+        dao.insertWorkoutExercises(Training.values(inputs).mapIndexed { i, e -> WorkoutExercise(workoutId = id, position = i, name = e.name, sets = e.sets, reps = e.reps, weight = e.weight) })
+    }
 }

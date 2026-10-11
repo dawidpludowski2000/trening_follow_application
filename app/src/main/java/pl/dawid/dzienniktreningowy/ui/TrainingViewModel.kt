@@ -20,6 +20,7 @@ class TrainingViewModel(app: Application, private val saved: SavedStateHandle) :
     var error by mutableStateOf<String?>(null); private set
     var message by mutableStateOf<String?>(null); private set
     var saving by mutableStateOf(false); private set
+    var seedingDemo by mutableStateOf(false); private set
     private var observation: Job? = null
     init { refresh() }
     fun refresh() {
@@ -34,6 +35,19 @@ class TrainingViewModel(app: Application, private val saved: SavedStateHandle) :
     fun selectTab(value: String) { tab=value; saved["tab"]=value }
     fun edit(value: EditorDraft?) { if(saving) return; draft=value; saved["draft"]=value?.encode(); error=null; if(value!=null) message=null }
     fun tell(value: String) { message=value }
+    fun loadDemoData() {
+        if (seedingDemo || _state.value.plans.isNotEmpty() || _state.value.workouts.isNotEmpty()) return
+        seedingDemo = true
+        viewModelScope.launch {
+            try {
+                val inserted = repo.seedDemoIfEmpty()
+                tell(if (inserted) "Przykładowe plany i treningi zostały dodane." else "Dane można dodać tylko do pustego dziennika.")
+            } catch (e: Exception) {
+                if (e is CancellationException) throw e
+                tell("Nie udało się dodać przykładowych danych. Spróbuj ponownie.")
+            } finally { seedingDemo = false }
+        }
+    }
     fun clearMessage() { message=null }
     fun newPlan() = edit(EditorDraft())
     fun newWorkout() = edit(EditorDraft(kind="workout"))

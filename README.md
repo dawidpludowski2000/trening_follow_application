@@ -33,7 +33,7 @@ APK: `app/build/outputs/apk/debug/app-debug.apk`. Jest podpisany kluczem debug i
 
 **Testy interfejsu czyszczą dane aplikacji na urządzeniu testowym. Uruchamiaj je na osobnym emulatorze, nie na telefonie z własną historią.**
 
-Testy specjalne GPS i odebranych uprawnień wymagają przygotowania emulatora. Opis i wyniki: [docs/TESTY.md](docs/TESTY.md). Scenariusz zrzutów i przykładowych danych jest opt-in; aplikacja nie wstawia ich użytkownikowi automatycznie.
+Testy specjalne GPS i odebranych uprawnień wymagają przygotowania emulatora. Opis i wyniki: [docs/TESTY.md](docs/TESTY.md). Aplikacja startuje z pustym dziennikiem; w zakładce Ustawienia można jednorazowo wczytać przykładowe plany i historię (2 plany, 6 treningów), aby od razu zobaczyć statystyki. Opcja działa tylko przy pustym dzienniku.
 
 ## Struktura i technologie
 - `data/`: encje Room, DAO, baza i repozytorium z transakcjami.

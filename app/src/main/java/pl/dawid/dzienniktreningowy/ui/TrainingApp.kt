@@ -53,7 +53,7 @@ fun WorkoutWithExercises.volume() = Training.volume(exercises.map { ExerciseValu
                     vm.tab=="Plany" -> PlansScreen(state.plans,vm)
                     vm.tab=="Historia" -> HistoryScreen(state.workouts,vm)
                     vm.tab=="Postępy" -> StatsScreen(state.workouts)
-                    else -> SettingsScreen(vm::tell)
+                    else -> SettingsScreen(vm::tell, state.plans.isEmpty() && state.workouts.isEmpty(), vm.seedingDemo, vm::loadDemoData)
                 }
             }
         }

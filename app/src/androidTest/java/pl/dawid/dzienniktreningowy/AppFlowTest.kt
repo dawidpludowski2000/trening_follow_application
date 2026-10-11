@@ -80,6 +80,21 @@ class AppFlowTest {
         val original=EditorDraft(kind="workout",id=4,name="Żółć",date=123456789,duration="20",note="Notatka",latitude=52.0,longitude=21.0,exercises=listOf(ExerciseInput("Przysiad","2","8","2,5")))
         assertEquals(original,EditorDraft.decode(original.encode()))
     }
+
+    @Test fun settingsCanLoadDemoDataOnceAndItAppearsInStats() {
+        compose.onNodeWithTag("tab_3").performClick()
+        compose.onNodeWithTag("load_demo_data").assertIsEnabled().performClick()
+        compose.waitUntil(10000) {
+            runBlocking {
+                val dao = TrainingDatabase.get(compose.activity).dao()
+                dao.planCount() == 2 && dao.workoutCount() == 6
+            }
+        }
+        compose.onNodeWithTag("load_demo_data").assertIsNotEnabled()
+        compose.onNodeWithTag("tab_2").performClick()
+        compose.onNodeWithText("6 treningów").assertExists()
+        compose.onNodeWithText("Twoje postępy").assertExists()
+    }
 }
 
 

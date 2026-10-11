@@ -5,6 +5,8 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TrainingDao {
+    @Query("SELECT COUNT(*) FROM plans") suspend fun planCount(): Int
+    @Query("SELECT COUNT(*) FROM workouts") suspend fun workoutCount(): Int
     @Transaction @Query("SELECT * FROM plans ORDER BY name COLLATE NOCASE")
     fun plans(): Flow<List<PlanWithExercises>>
     @Transaction @Query("SELECT * FROM workouts ORDER BY performedAt DESC, id DESC")

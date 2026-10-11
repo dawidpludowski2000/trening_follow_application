@@ -60,7 +60,7 @@ import java.util.Locale
     } }
 }
 
-@Composable fun SettingsScreen(tell:(String)->Unit) {
+@Composable fun SettingsScreen(tell:(String)->Unit, canLoadDemo:Boolean, seedingDemo:Boolean, loadDemo:()->Unit) {
     val context=LocalContext.current
     val scope=rememberCoroutineScope()
     val prefs=remember {Reminders.preferences(context)}
@@ -96,6 +96,13 @@ import java.util.Locale
     }
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp).testTag("settings"),verticalArrangement=Arrangement.spacedBy(16.dp)) {
         Text("Przypomnienia i prywatność",style=MaterialTheme.typography.headlineSmall)
+        OutlinedCard { Column(Modifier.fillMaxWidth().padding(16.dp),verticalArrangement=Arrangement.spacedBy(8.dp)) {
+            Text("Dane przykładowe",style=MaterialTheme.typography.titleLarge)
+            Text(if (canLoadDemo) "Dodaj przykładowe plany i historię treningów, aby od razu zobaczyć działanie statystyk. Dane będzie można edytować i usuwać." else "Przykładowe dane są dostępne tylko wtedy, gdy dziennik jest pusty.")
+            Button(onClick=loadDemo,enabled=canLoadDemo && !seedingDemo,modifier=Modifier.testTag("load_demo_data")) {
+                Text(if (seedingDemo) "Wczytywanie…" else "Wczytaj przykładowe dane")
+            }
+        } }
         Card(Modifier.fillMaxWidth()) { Column(Modifier.padding(16.dp),verticalArrangement=Arrangement.spacedBy(12.dp)) {
             Text("Codzienne przypomnienie",style=MaterialTheme.typography.titleLarge)
             Text("Android może opóźnić powiadomienie, np. podczas oszczędzania baterii. To przybliżona pora, nie dokładny alarm.")
