@@ -20,3 +20,10 @@ Aplikacja służy jednej osobie do planowania i zapisywania treningów. Dane nie
 - Lokalizacja jest zapisywana tylko po naciśnięciu przycisku i udzieleniu zgody.
 - Przypomnienia mogą przyjść z opóźnieniem zależnie od Androida.
 - Jedna pozycja ćwiczenia opisuje serie o takich samych powtórzeniach i ciężarze.
+## Wymagania niefunkcjonalne
+
+- Interfejs używa Material 3, przewija się na małych ekranach i dostosowuje do większych.
+- Kod jest podzielony na pakiety `ui`, `domain`, `data` i `device`; operacje bazy działają asynchronicznie.
+- Formularz zachowuje stan po zmianie konfiguracji ekranu.
+- Dane są w prywatnej bazie aplikacji; lokalizacja jest opcjonalna i wymaga zgody.
+- Pola mają czytelne etykiety, a wykres ma tekstowy opis.
