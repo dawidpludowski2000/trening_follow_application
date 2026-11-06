@@ -35,6 +35,16 @@ Trening przechowuje własną kopię ćwiczeń, więc późniejsza zmiana planu n
 
 Użytkownik może zarządzać planem, zapisać trening z planu lub bez niego, poprawić historię, sprawdzić statystyki, ustawić przypomnienie albo dodać bieżącą lokalizację.
 
+```mermaid
+flowchart LR
+    U((Użytkownik)) --> P[Zarządza planami]
+    U --> T[Zapisuje i edytuje trening]
+    U --> H[Przegląda historię]
+    U --> S[Sprawdza postępy]
+    U --> R[Ustawia przypomnienie]
+    U --> L[Opcjonalnie dodaje lokalizację]
+```
+
 ## Walidacja
 
 Aplikacja sprawdza nazwy, serie, powtórzenia, ciężar, czas treningu, notatkę i współrzędne. Nieprawidłowe wartości są odrzucane i pokazywany jest komunikat.
